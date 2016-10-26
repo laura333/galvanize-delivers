@@ -1,10 +1,7 @@
 "use strict";
-console.log("hi");
+console.log("yummy food!");
 
-// var orderBurger = document.querySelector("body > div.container > div > div.col.s4.l6 > div > div:nth-child(1) > div > div.card-action > a");
 var cards = document.querySelectorAll("div.card");
-// console.log(orderBurger);
-
 var tempCard = {};
 
 for(var i = 0; i < cards.length; i++) {
@@ -16,10 +13,13 @@ for(var i = 0; i < cards.length; i++) {
     var itemPrice = itemContent.querySelectorAll('p')[1];
     itemDetails['name'] = itemName.innerText;
     itemDetails['price'] = itemPrice.innerText;
-    console.log(itemDetails);
+    // console.log(itemDetails);
     buildTable(itemDetails);
   });
 }
+
+var subtotal = 0;
+
 function buildTable(itemDetails) {
   var table = document.getElementById('table');
   var tr = document.createElement('tr');
@@ -29,4 +29,9 @@ function buildTable(itemDetails) {
   tdName.innerHTML = itemDetails.name;
   tdPrice.innerHTML = itemDetails.price;
     table.appendChild(tr);
+    var hasSym = itemDetails.price;
+    var removeSym = hasSym.substring(1, hasSym.length);
+    // console.log(removeSym);
+      subtotal += parseFloat(removeSym);
+    console.log(subtotal);
 }
