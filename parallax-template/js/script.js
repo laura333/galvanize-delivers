@@ -19,6 +19,8 @@ for(var i = 0; i < cards.length; i++) {
 }
 
 var subtotal = 0;
+var tax = 0;
+var total = 0;
 
 function buildTable(itemDetails) {
   var table = document.getElementById('table');
@@ -33,5 +35,32 @@ function buildTable(itemDetails) {
     var removeSym = hasSym.substring(1, hasSym.length);
     // console.log(removeSym);
       subtotal += parseFloat(removeSym);
-    console.log(subtotal);
-}
+    tax = subtotal * 0.0816;
+    var fee = 2.50;
+    total = (subtotal + tax + fee);
+    document.getElementById('subtotal').innerHTML = "$" + subtotal;
+    document.getElementById('tax').innerHTML = "$" + tax.toFixed(2);
+    document.getElementById('fee').innerHTML = "$" + fee.toFixed(2);
+    document.getElementById('total').innerHTML = "$" + total.toFixed(2);
+    console.log('$' + subtotal);
+    console.log('$' + tax.toFixed(2));
+    console.log('$' + total.toFixed(2));}
+
+var placeOrder = document.querySelector('.btn-large');
+placeOrder.addEventListener('click', function () {
+  var name = document.getElementById('icon_prefix').value;
+  var telephone = document.getElementById('icon_telephone').value;
+  var address = document.getElementById('textarea1').value;
+        if (subtotal == 0) {
+          Materialize.toast('Please select an item.', 3000);
+        } else if (name.length === 0) {
+          Materialize.toast('Please enter your name.', 3000);
+        } else if (telephone.length === 0) {
+          Materialize.toast('Please enter your phone number.', 3000);
+        } else if (address.length === 0) {
+          Materialize.toast('Please enter your address.', 3000);
+        } else {
+          Materialize.toast('Order Placed!', 3000);
+        }
+        // console.log(name);
+    });
